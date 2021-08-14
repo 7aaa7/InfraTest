@@ -9,7 +9,7 @@ resource "aws_security_group" "prod-web-servers-sg" {
 }
 
 # allow incoming traffic from port 80
-resource "aws_security_group_rule" "nlb_public_in_80" {  
+resource "aws_security_group_rule" "public_in_80" {  
   type              = "ingress"
   security_group_id = aws_security_group.prod-web-servers-sg.id
 
@@ -20,7 +20,7 @@ resource "aws_security_group_rule" "nlb_public_in_80" {
 }
 
 # allow incoming traffic from port 443
-resource "aws_security_group_rule" "nlb_public_in_443" {  
+resource "aws_security_group_rule" "public_in_443" {  
   type              = "ingress"
   security_group_id = aws_security_group.prod-web-servers-sg.id
 
@@ -31,7 +31,7 @@ resource "aws_security_group_rule" "nlb_public_in_443" {
 }
 
 # allow outgoing traffic within the VPC
-resource "aws_security_group_rule" "nlb_public_out" {  
+resource "aws_security_group_rule" "public_out" {  
   type              = "egress"
   security_group_id = aws_security_group.prod-web-servers-sg.id
 
