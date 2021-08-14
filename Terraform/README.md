@@ -1,7 +1,6 @@
 # terraformTest
 ```
 
- aaa@Saurabhs-MacBook-Pro  ~/3w3/Practice/terraformTest/infra   main ±
  ➜ terraform apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
@@ -732,7 +731,7 @@ aws_lb_target_group_attachment.web-servers-attachment-http[0]: Creation complete
 aws_lb_target_group_attachment.web-servers-attachment-https[1]: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-https/623e3289268a4b61-20210814180103789200000005]
 
 Apply complete! Resources: 20 added, 0 changed, 0 destroyed.
- aaa@Saurabhs-MacBook-Pro  ~/3w3/Practice/terraformTest/infra   main ±
+
  ➜ 
 
  ```
