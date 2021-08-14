@@ -56,12 +56,16 @@ def print_servers(response):
         print("No Reservation found from the boto3 response")
 
 def display_instance_table(instances): 
+    columns = ["Instance Name", "Instance ID"]
     try: 
         from tabulate import tabulate
-        print(tabulate(instances, ["Instance Name", "Instance ID"], tablefmt="grid"))
+        print(tabulate(instances, columns, tablefmt="grid"))
     except: 
-        logging.warning("No tabulate package found on this machine, pretty printing the details\n\n")
-        print(instances)
+        logging.warning("No tabulate package found on this machine, please install tabulate from pip3 by running \"pip3 install tabulate\" \n")
+        row_format ="{:>25}" * (len(columns) + 1)
+        print(row_format.format("", *columns))
+        for instance in instances:
+            print(row_format.format("", *instance))
 
 def get_instance_name(tags):
     for tag in tags: 
