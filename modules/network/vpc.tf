@@ -45,3 +45,11 @@ resource "aws_subnet" "subnet_backend_1a" {
     Type = "Backend"
   }
 }
+
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "${var.config.name}-igw"
+  }
+}

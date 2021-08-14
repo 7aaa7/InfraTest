@@ -45,8 +45,7 @@ resource "aws_security_group_rule" "nlb_public_out" {
 resource "aws_lb" "nlb_public" {  
   name            = "${var.config.name}-nlb-public"
   internal        = false  
-  load_balancer_type = "network"
-  security_groups = [aws_security_group.nlb_public.id]
+  load_balancer_type = "network"  
   subnets         = compact(concat(aws_subnet.subnet_public_1a[*].id, [""]))
 
   access_logs {
