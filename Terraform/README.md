@@ -1,5 +1,9 @@
 # terraformTest
+` NOTE: Terraform apply has to run from "Terraform/infra" directory, Terraform state would be stored on local directory, there is no remote state storage`
+
 ```
+ ➜ cd Terraform/ 
+ ➜ cd infra  
 
  ➜ terraform apply
 
