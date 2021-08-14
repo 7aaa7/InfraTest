@@ -1,9 +1,9 @@
-resource "aws_security_group" "nlb_public" {  
-  name_prefix = "${var.config.name}-sg-public-nlb"
+resource "aws_security_group" "prod-web-servers-sg" {  
+  name_prefix = "${var.config.name}-prod-web-servers-sg"
   vpc_id      = aws_vpc.vpc.id
 
   tags = {
-    "Name"        = "${var.config.name}-sg-public-nlb"
+    "Name"        = "${var.config.name}-prod-web-servers-sg"
     "Description" = "Allow traffic into public load balancer"
   }
 }
@@ -11,7 +11,7 @@ resource "aws_security_group" "nlb_public" {
 # allow incoming traffic from port 80
 resource "aws_security_group_rule" "nlb_public_in_80" {  
   type              = "ingress"
-  security_group_id = aws_security_group.nlb_public.id
+  security_group_id = aws_security_group.prod-web-servers-sg.id
 
   protocol    = "tcp"
   from_port   = 80
@@ -22,7 +22,7 @@ resource "aws_security_group_rule" "nlb_public_in_80" {
 # allow incoming traffic from port 443
 resource "aws_security_group_rule" "nlb_public_in_443" {  
   type              = "ingress"
-  security_group_id = aws_security_group.nlb_public.id
+  security_group_id = aws_security_group.prod-web-servers-sg.id
 
   protocol    = "tcp"
   from_port   = 443
@@ -33,7 +33,7 @@ resource "aws_security_group_rule" "nlb_public_in_443" {
 # allow outgoing traffic within the VPC
 resource "aws_security_group_rule" "nlb_public_out" {  
   type              = "egress"
-  security_group_id = aws_security_group.nlb_public.id
+  security_group_id = aws_security_group.prod-web-servers-sg.id
 
   protocol    = "tcp"
   from_port   = 0
