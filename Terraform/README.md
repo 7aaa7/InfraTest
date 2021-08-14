@@ -1,5 +1,5 @@
 # terraformTest
-` NOTE: Terraform apply has to run from "Terraform/infra" directory, Terraform state would be stored on local directory, there is no remote state storage`
+` NOTE: Terraform apply has to run from "Terraform/infra" directory, Terraform state would be stored on local directory, there is no remote state storage for this particular example, remote state can be stored in s3 with DynmoDB lock in case of distributed development`
 
 ```
  ➜ cd Terraform/ 
