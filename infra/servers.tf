@@ -24,6 +24,7 @@ resource "aws_instance" "prod-web-servers" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "r5.large"
   subnet_id = data.aws_subnet.subnet-backend-1a.id
+  vpc_security_group_ids = [ data.aws_security_group.web-servers.id ]
   key_name = aws_key_pair.webserver-public-key.key_name  
   tags = {
     Name = "prod-web-server-${count.index}"
