@@ -3,7 +3,7 @@ resource "aws_security_group" "nlb_public" {
   vpc_id      = aws_vpc.vpc.id
 
   tags = {
-    "Name"        = "${var.config.name}-sg-public-alb"
+    "Name"        = "${var.config.name}-sg-public-nlb"
     "Description" = "Allow traffic into public load balancer"
   }
 }
@@ -31,7 +31,7 @@ resource "aws_security_group_rule" "nlb_public_in_443" {
 }
 
 # allow outgoing traffic within the VPC
-resource "aws_security_group_rule" "alb_public_out" {  
+resource "aws_security_group_rule" "nlb_public_out" {  
   type              = "egress"
   security_group_id = aws_security_group.nlb_public.id
 
@@ -39,4 +39,23 @@ resource "aws_security_group_rule" "alb_public_out" {
   from_port   = 0
   to_port     = 65535
   cidr_blocks = [var.vpc_cidr_block]
+}
+
+
+resource "aws_lb" "nlb_public" {  
+  name            = "${var.config.name}-nlb-public"
+  internal        = false  
+  load_balancer_type = "network"
+  security_groups = [aws_security_group.nlb_public.id]
+  subnets         = compact(concat(aws_subnet.subnet_public_1a[*].id, [""]))
+
+  access_logs {
+    enabled = var.public_nlb_enable_access_logs
+    bucket  = var.public_nlb_access_logs_bucket
+    prefix  = var.public_nlb_access_logs_bucket_prefix
+  }
+
+  tags = {
+    "Name" = "${var.config.name}-nlb-public"
+  }
 }

@@ -28,3 +28,21 @@ variable "cidr_allow_private" {
   type        = list(string)
   default     = ["10.0.0.0/8"]
 }
+
+variable "public_nlb_enable_access_logs" {
+  description = "Enable access logs for the nlb"
+  type        = bool
+  default     = false
+}
+
+variable "public_nlb_access_logs_bucket" {
+  description = "Name of the S3 Bucket to use for the nlb access logs"
+  type        = string
+  default     = ""
+}
+
+variable "public_nlb_access_logs_bucket_prefix" {
+  description = "Path inside the S3 Bucket to store the nlb access logs"
+  type        = string
+  default     = "nlb_public/logs"
+}
