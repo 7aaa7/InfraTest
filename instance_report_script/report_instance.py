@@ -73,8 +73,8 @@ def get_instance_name(tags):
             instance_name = tag['Value']
             return(instance_name)
     return ""
-def set_logging_config(config, logger = logging): 
 
+def set_logging_config(config, logger = logging): 
     if logger.__name__ == "logging":
         logger.basicConfig(**config)
 
