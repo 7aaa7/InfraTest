@@ -1,14 +1,14 @@
 `The script accepts a region, type of instances to report and VPC, Default values are "us-east-1", "r5-large" and "default"`
 
 ```
- ➜ python3 report_instance.py --list_vpcs --region ap-south-1
-vpc-0e294255bc7c49128
+ ➜ python3 report_instance.py --help                                                          
+usage: report_instance.py [-h] [--region REGION] [--type TYPE] [--vpc VPC] [--profile PROFILE] [--list_vpcs]
 
 optional arguments:
   -h, --help            show this help message and exit
   --region REGION, -r REGION
                         The Region to search
-  --type TYPE, -t TYPE  The TYPE of instace to report
+  --type TYPE, -t TYPE  The TYPE of instance to report
   --vpc VPC, -c VPC     The AWS VPC to search
   --profile PROFILE, -p PROFILE
                         The AWS credential profile
