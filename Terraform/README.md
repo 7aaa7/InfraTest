@@ -2,10 +2,7 @@
 ` NOTE: Terraform apply has to run from "Terraform/infra" directory, Terraform state would be stored on local directory, there is no remote state storage for this particular example, remote state can be stored in s3 with DynmoDB lock in case of distributed development`
 
 ```
- ➜ cd Terraform/ 
- ➜ cd infra  
-
- ➜ terraform apply
+  ➜ terraform apply                                                                            
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   + create
@@ -131,12 +128,12 @@ Terraform will perform the following actions:
       + source_dest_check                    = true
       + subnet_id                            = (known after apply)
       + tags                                 = {
-          + "Name" = "prod-web-server-0"
+          + "Name" = "prod-web-server-1"
           + "Tier" = "Private"
           + "Type" = "Backend"
         }
       + tags_all                             = {
-          + "Name" = "prod-web-server-0"
+          + "Name" = "prod-web-server-1"
           + "Tier" = "Private"
           + "Type" = "Backend"
         }
@@ -236,12 +233,12 @@ Terraform will perform the following actions:
       + source_dest_check                    = true
       + subnet_id                            = (known after apply)
       + tags                                 = {
-          + "Name" = "prod-web-server-1"
+          + "Name" = "prod-web-server-2"
           + "Tier" = "Private"
           + "Type" = "Backend"
         }
       + tags_all                             = {
-          + "Name" = "prod-web-server-1"
+          + "Name" = "prod-web-server-2"
           + "Tier" = "Private"
           + "Type" = "Backend"
         }
@@ -525,11 +522,11 @@ Terraform will perform the following actions:
       + owner_id               = (known after apply)
       + revoke_rules_on_delete = false
       + tags                   = {
-          + "Description" = "Allow traffic into public load balancer"
+          + "Description" = "Allow traffic into web servers"
           + "Name"        = "terraform-test-prod-web-servers-sg"
         }
       + tags_all               = {
-          + "Description" = "Allow traffic into public load balancer"
+          + "Description" = "Allow traffic into web servers"
           + "Name"        = "terraform-test-prod-web-servers-sg"
         }
       + vpc_id                 = (known after apply)
@@ -665,32 +662,32 @@ Do you want to perform these actions?
 
   Enter a value: yes
 
-module.network.aws_vpc.vpc: Creating...
 aws_key_pair.webserver-public-key: Creating...
-aws_key_pair.webserver-public-key: Creation complete after 0s [id=webserver-public-key]
+module.network.aws_vpc.vpc: Creating...
+aws_key_pair.webserver-public-key: Creation complete after 1s [id=webserver-public-key]
 module.network.aws_vpc.vpc: Still creating... [10s elapsed]
-module.network.aws_vpc.vpc: Creation complete after 12s [id=vpc-07f82473dd24853d7]
+module.network.aws_vpc.vpc: Creation complete after 12s [id=vpc-0e294255bc7c49128]
 module.network.aws_internet_gateway.igw: Creating...
 module.network.aws_subnet.subnet_public_1a: Creating...
 module.network.aws_subnet.subnet_backend_1a: Creating...
 module.network.aws_security_group.prod-web-servers-sg: Creating...
-module.network.aws_subnet.subnet_backend_1a: Creation complete after 1s [id=subnet-09cdf20652acae779]
-module.network.aws_internet_gateway.igw: Creation complete after 1s [id=igw-03f5d48130853c7df]
-module.network.aws_security_group.prod-web-servers-sg: Creation complete after 1s [id=sg-08edb6407ac0b6f5a]
+module.network.aws_subnet.subnet_backend_1a: Creation complete after 1s [id=subnet-0d6a92199108d07bd]
+module.network.aws_internet_gateway.igw: Creation complete after 1s [id=igw-03a7bf2a222bb0711]
+module.network.aws_security_group.prod-web-servers-sg: Creation complete after 2s [id=sg-07bcd3fa721e0550f]
+module.network.aws_security_group_rule.public_out: Creating...
 module.network.aws_security_group_rule.public_in_443: Creating...
 module.network.aws_security_group_rule.public_in_80: Creating...
-module.network.aws_security_group_rule.public_out: Creating...
-module.network.aws_security_group_rule.public_in_443: Creation complete after 1s [id=sgrule-2337406845]
-module.network.aws_security_group_rule.public_out: Creation complete after 1s [id=sgrule-1849098247]
-module.network.aws_security_group_rule.public_in_80: Creation complete after 2s [id=sgrule-418803717]
+module.network.aws_security_group_rule.public_out: Creation complete after 0s [id=sgrule-4163587467]
+module.network.aws_security_group_rule.public_in_443: Creation complete after 1s [id=sgrule-1875455035]
+module.network.aws_security_group_rule.public_in_80: Creation complete after 1s [id=sgrule-219378255]
 module.network.aws_subnet.subnet_public_1a: Still creating... [10s elapsed]
-module.network.aws_subnet.subnet_public_1a: Creation complete after 11s [id=subnet-0fbb69dd3a3f565c8]
+module.network.aws_subnet.subnet_public_1a: Creation complete after 11s [id=subnet-08aa75fdaa6cf2eaf]
 module.network.aws_lb.nlb_public: Creating...
 module.network.aws_lb.nlb_public: Still creating... [10s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [20s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [30s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [40s elapsed]
-^[module.network.aws_lb.nlb_public: Still creating... [50s elapsed]
+module.network.aws_lb.nlb_public: Still creating... [50s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [1m0s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [1m10s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [1m20s elapsed]
@@ -702,37 +699,37 @@ module.network.aws_lb.nlb_public: Still creating... [2m10s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [2m20s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [2m30s elapsed]
 module.network.aws_lb.nlb_public: Still creating... [2m40s elapsed]
-module.network.aws_lb.nlb_public: Creation complete after 2m42s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:loadbalancer/net/terraform-test-nlb-public/a2ab8958adacce21]
+module.network.aws_lb.nlb_public: Creation complete after 2m43s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:loadbalancer/net/terraform-test-nlb-public/80b228900f62b351]
 data.aws_subnet.subnet-backend-1a: Reading...
-data.aws_lb.nlb-public: Reading...
 data.aws_vpc.vpc: Reading...
-data.aws_subnet.subnet-backend-1a: Read complete after 1s [id=subnet-09cdf20652acae779]
-data.aws_lb.nlb-public: Read complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:loadbalancer/net/terraform-test-nlb-public/a2ab8958adacce21]
-data.aws_vpc.vpc: Read complete after 1s [id=vpc-07f82473dd24853d7]
+data.aws_lb.nlb-public: Reading...
+data.aws_subnet.subnet-backend-1a: Read complete after 0s [id=subnet-0d6a92199108d07bd]
+data.aws_lb.nlb-public: Read complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:loadbalancer/net/terraform-test-nlb-public/80b228900f62b351]
+data.aws_vpc.vpc: Read complete after 1s [id=vpc-0e294255bc7c49128]
 data.aws_security_group.web-servers: Reading...
-aws_lb_target_group.web-servers-https: Creating...
 aws_lb_target_group.web-servers-http: Creating...
-data.aws_security_group.web-servers: Read complete after 0s [id=sg-08edb6407ac0b6f5a]
-aws_instance.prod-web-servers[1]: Creating...
+aws_lb_target_group.web-servers-https: Creating...
+data.aws_security_group.web-servers: Read complete after 0s [id=sg-07bcd3fa721e0550f]
 aws_instance.prod-web-servers[0]: Creating...
-aws_lb_target_group.web-servers-https: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-https/623e3289268a4b61]
-aws_lb_listener.web-service-https: Creating...
-aws_lb_target_group.web-servers-http: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-http/ec449f7f3ce0ba0f]
+aws_instance.prod-web-servers[1]: Creating...
+aws_lb_target_group.web-servers-http: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-http/24fae74d3ec2e191]
 aws_lb_listener.web-service-http: Creating...
-aws_lb_listener.web-service-https: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:listener/net/terraform-test-nlb-public/a2ab8958adacce21/3f4119f813b0505f]
-aws_lb_listener.web-service-http: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:listener/net/terraform-test-nlb-public/a2ab8958adacce21/84fec6e2c1819b17]
-aws_instance.prod-web-servers[1]: Still creating... [10s elapsed]
+aws_lb_target_group.web-servers-https: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-https/c4662bbc4229eee9]
+aws_lb_listener.web-service-https: Creating...
+aws_lb_listener.web-service-http: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:listener/net/terraform-test-nlb-public/80b228900f62b351/3dde360e0d28578a]
+aws_lb_listener.web-service-https: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:listener/net/terraform-test-nlb-public/80b228900f62b351/845671a90d1863cb]
 aws_instance.prod-web-servers[0]: Still creating... [10s elapsed]
-aws_instance.prod-web-servers[1]: Creation complete after 13s [id=i-0db9460615c2351a0]
-aws_instance.prod-web-servers[0]: Creation complete after 13s [id=i-07c334207011ee920]
-aws_lb_target_group_attachment.web-servers-attachment-http[1]: Creating...
+aws_instance.prod-web-servers[1]: Still creating... [10s elapsed]
+aws_instance.prod-web-servers[1]: Creation complete after 13s [id=i-0bab3151f17e833c0]
+aws_instance.prod-web-servers[0]: Creation complete after 13s [id=i-0a6c2853d37226e0c]
+aws_lb_target_group_attachment.web-servers-attachment-https[1]: Creating...
 aws_lb_target_group_attachment.web-servers-attachment-http[0]: Creating...
 aws_lb_target_group_attachment.web-servers-attachment-https[0]: Creating...
-aws_lb_target_group_attachment.web-servers-attachment-https[1]: Creating...
-aws_lb_target_group_attachment.web-servers-attachment-http[1]: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-http/ec449f7f3ce0ba0f-20210814180103351400000002]
-aws_lb_target_group_attachment.web-servers-attachment-https[0]: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-https/623e3289268a4b61-20210814180103404800000003]
-aws_lb_target_group_attachment.web-servers-attachment-http[0]: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-http/ec449f7f3ce0ba0f-20210814180103664600000004]
-aws_lb_target_group_attachment.web-servers-attachment-https[1]: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-https/623e3289268a4b61-20210814180103789200000005]
+aws_lb_target_group_attachment.web-servers-attachment-http[1]: Creating...
+aws_lb_target_group_attachment.web-servers-attachment-http[1]: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-http/24fae74d3ec2e191-20210815053618267600000002]
+aws_lb_target_group_attachment.web-servers-attachment-https[1]: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-https/c4662bbc4229eee9-20210815053618306100000003]
+aws_lb_target_group_attachment.web-servers-attachment-https[0]: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-https/c4662bbc4229eee9-20210815053618340100000004]
+aws_lb_target_group_attachment.web-servers-attachment-http[0]: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-south-1:507781131554:targetgroup/terraform-test-web-servers-http/24fae74d3ec2e191-20210815053618610800000005]
 
 Apply complete! Resources: 20 added, 0 changed, 0 destroyed.
 

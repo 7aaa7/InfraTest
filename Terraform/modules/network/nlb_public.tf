@@ -4,7 +4,7 @@ resource "aws_security_group" "prod-web-servers-sg" {
 
   tags = {
     "Name"        = "${var.config.name}-prod-web-servers-sg"
-    "Description" = "Allow traffic into public load balancer"
+    "Description" = "Allow traffic into web servers"
   }
 }
 

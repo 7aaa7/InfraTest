@@ -27,7 +27,7 @@ resource "aws_instance" "prod-web-servers" {
   vpc_security_group_ids = [ data.aws_security_group.web-servers.id ]
   key_name = aws_key_pair.webserver-public-key.key_name  
   tags = {
-    Name = "prod-web-server-${count.index}"
+    Name = "prod-web-server-${count.index + 1}"
     Tier = "Private"
     Type = "Backend"
   }
